@@ -1,5 +1,11 @@
 <template>
-  <div>
-    <h1>This is a login page</h1>
-  </div>
+  <scoped-login />
 </template>
+
+<script>
+export default {
+  components: {
+    ScopedLogin: () => import("@/components/scoped/login/TheLogin")
+  }
+}
+</script>
