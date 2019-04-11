@@ -19,7 +19,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary">Login</v-btn>
+            <v-btn color="primary" @click="submitLogin">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -28,5 +28,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    submitLogin: () => {
+      console.log('submitted!');
+    }
+  }
+};
 </script>
