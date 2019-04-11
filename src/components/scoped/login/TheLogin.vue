@@ -5,16 +5,8 @@
         <v-card class="elevation-12">
           <v-card-text>
             <v-form>
-              <v-text-field
-                prepend-icon="person"
-                label="Login"
-                type="text"
-              ></v-text-field>
-              <v-text-field
-                prepend-icon="lock"
-                label="Password"
-                type="password"
-              ></v-text-field>
+              <v-text-field v-model="email" prepend-icon="person" label="Login" type="text"></v-text-field>
+              <v-text-field v-model="password" prepend-icon="lock" label="Password" type="password"></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -27,11 +19,28 @@
   </v-container>
 </template>
 
+
+
 <script>
+import { auth } from "@/services/firebase";
+
 export default {
+  data: () => {
+    return {
+      email: "",
+      password: ""
+    };
+  },
   methods: {
-    submitLogin: () => {
-      console.log('submitted!');
+    submitLogin: async function() {
+      try {
+        const results = await auth.signInWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+      } catch (e) {
+        console.log("got an error");
+      }
     }
   }
 };
