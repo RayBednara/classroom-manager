@@ -5,8 +5,18 @@
         <v-card class="elevation-12">
           <v-card-text>
             <v-form>
-              <v-text-field v-model="email" prepend-icon="person" label="Login" type="text"></v-text-field>
-              <v-text-field v-model="password" prepend-icon="lock" label="Password" type="password"></v-text-field>
+              <v-text-field
+                v-model="email"
+                prepend-icon="person"
+                label="Login"
+                type="text"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                prepend-icon="lock"
+                label="Password"
+                type="password"
+              ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -18,8 +28,6 @@
     </v-layout>
   </v-container>
 </template>
-
-
 
 <script>
 import { auth } from "@/services/firebase";
@@ -38,8 +46,18 @@ export default {
           this.email,
           this.password
         );
+        // store token inside of localStorage
+        localStorage.setItem(
+          "classroom.user",
+          JSON.stringify({
+            id: results.user.uid,
+            token: results.user.refreshToken
+          })
+        );
+
+        console.info(results);
       } catch (e) {
-        console.log("got an error");
+        console.log("got an error", e);
       }
     }
   }
