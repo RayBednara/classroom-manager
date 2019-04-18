@@ -17,6 +17,9 @@
                 label="Password"
                 type="password"
               ></v-text-field>
+              <v-alert value="invalidLogin" color="error" icon="warning"
+                >Invalid Login</v-alert
+              >
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -36,7 +39,8 @@ export default {
   data: () => {
     return {
       email: "",
-      password: ""
+      password: "",
+      invalidLogin: false
     };
   },
   methods: {
@@ -59,7 +63,9 @@ export default {
 
         console.info(results);
       } catch (e) {
-        console.log("got an error", e);
+        if (e.code === "auth/wrong-password") {
+          this.invalidLogin = true;
+        }
       }
     }
   }
