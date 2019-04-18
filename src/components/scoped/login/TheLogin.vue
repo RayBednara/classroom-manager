@@ -55,6 +55,8 @@ export default {
           })
         );
 
+        this.$router.push({ path: "/dashboard" });
+
         console.info(results);
       } catch (e) {
         console.log("got an error", e);
